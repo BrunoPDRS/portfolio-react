@@ -1,11 +1,18 @@
 import React from 'react';
 
-const App = () => {
+import Sidebar from './components/Sidebar';
+import Home from './pages/Home';
+
+import GlobalStyle from './styles/global';
+
+const App: React.FC = () => {
   return (
     <div className="App">
-      <h1>Hello World</h1>
+      <Sidebar />
+      <Home />
+      <GlobalStyle />
     </div>
   );
-}
+};
 
 export default App;
