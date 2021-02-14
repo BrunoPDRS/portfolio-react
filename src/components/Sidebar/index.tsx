@@ -28,11 +28,7 @@ const Sidebar: React.FC = () => (
         <FaGithub />
         <span>Github</span>
       </StyledLink>
-      <StyledLink
-        type="gmail"
-        href="mailto:bgpedrosas@gmail.com"
-        target="_blank"
-      >
+      <StyledLink type="gmail" href="mailto:bgpedrosas@gmail.com">
         <SiGmail />
         <span>Gmail</span>
       </StyledLink>
