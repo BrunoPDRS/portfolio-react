@@ -27,6 +27,7 @@ const socialMedias = {
 
 export const Container = styled.aside`
   background-color: #282c34;
+  box-shadow: 2px 2px 8px 1px black;
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -34,9 +35,11 @@ export const Container = styled.aside`
   left: 0;
   margin-right: 16px;
   overflow-x: hidden;
+  position: fixed;
   top: 0;
   transition: ease-in-out 0.5s;
   width: 80px;
+  z-index: 0;
 
   &:hover {
     width: 250px;

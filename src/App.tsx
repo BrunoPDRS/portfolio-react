@@ -9,7 +9,9 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <Sidebar />
-      <Home />
+      <main>
+        <Home />
+      </main>
       <GlobalStyle />
     </div>
   );

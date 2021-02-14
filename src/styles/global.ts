@@ -2,14 +2,18 @@ import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
   * {
-    margin: 0;
-    padding: 0;
-    outline: 0;
     box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    outline: 0;
+    padding: 0;
   }
 
   body {
-    background-color: green;
+    background-color: #e5e5e5;
+    box-shadow: inset 12px 1px 8px 1px black;
+    height: 100vh;
+    width: 100%;
   }
 
   h1, h2, h3, h4, h5, h6, strong {
@@ -22,5 +26,9 @@ export default createGlobalStyle`
 
   .App {
     display: flex;
+  }
+
+  main {
+    margin-left: 100px;
   }
 `;
