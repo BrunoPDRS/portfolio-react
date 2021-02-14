@@ -78,7 +78,7 @@ export const StyledLink = styled.a<StyledLinkProps>`
   padding: 4px 10px;
   position: relative;
   text-decoration: none;
-  transition: transform linear 0.2s;
+  transition: transform ease 0.4s;
   width: 250px;
   white-space: nowrap;
 
