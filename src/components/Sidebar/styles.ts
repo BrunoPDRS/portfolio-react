@@ -4,25 +4,47 @@ interface StyledLinkProps {
   type?: 'linkedin' | 'github' | 'gmail' | 'hackerrank' | 'instagram';
 }
 
+const convertHexToRGB = (hex: string) => {
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+
+  if (!result) return { r: 0, g: 0, b: 0 };
+  return {
+    r: parseInt(result[1], 16),
+    g: parseInt(result[2], 16),
+    b: parseInt(result[3], 16),
+  };
+};
+
+const setSidebarCSS = (colorHex: string) => {
+  const { r, g, b } = convertHexToRGB(colorHex);
+  return css`
+    border-bottom: 4px solid rgb(${r}, ${g}, ${b});
+    margin-top: 44px;
+    padding-bottom: 4px;
+    svg {
+      color: rgb(${r}, ${g}, ${b});
+    }
+  `;
+};
+
 const socialMedias = {
   linkedin: css`
-    color: #0077b5;
+    border-bottom: 4px solid #0077b5;
+    padding-bottom: 4px;
+
+    & + a {
+      margin-top: 44px;
+    }
+
+    svg {
+      color: #0077b5;
+    }
   `,
-  github: css`
-    color: #f1502f;
-  `,
-  gmail: css`
-    color: #bb001b;
-  `,
-  hackerrank: css`
-    color: #1ba94c;
-  `,
-  instagram: css`
-    color: #cc2366;
-  `,
-  default: css`
-    color: #61dafb;
-  `,
+  github: setSidebarCSS('#f1502f'),
+  gmail: setSidebarCSS('#bb001b'),
+  hackerrank: setSidebarCSS('#1ba94c'),
+  instagram: setSidebarCSS('#cc2366'),
+  default: setSidebarCSS('#61dafb'),
 };
 
 export const Container = styled.aside`
@@ -66,9 +88,7 @@ export const StyledLink = styled.a<StyledLinkProps>`
 
   &:hover {
     transform: translateY(-10%);
-    svg {
-      ${props => socialMedias[props.type || 'default']}
-    }
+    ${props => socialMedias[props.type || 'default']}
   }
 
   svg {
