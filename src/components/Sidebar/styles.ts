@@ -18,28 +18,23 @@ const convertHexToRGB = (hex: string) => {
 const setSidebarCSS = (colorHex: string) => {
   const { r, g, b } = convertHexToRGB(colorHex);
   return css`
-    border-bottom: 4px solid rgb(${r}, ${g}, ${b});
-    margin-top: 44px;
-    padding-bottom: 4px;
     svg {
       color: rgb(${r}, ${g}, ${b});
     }
   `;
 };
 
+const themeColors = {
+  linkedin: convertHexToRGB('0077b5'),
+  github: convertHexToRGB('#f1502f'),
+  gmail: convertHexToRGB('#bb001b'),
+  hackerrank: convertHexToRGB('#1ba94c'),
+  instagram: convertHexToRGB('#cc2366'),
+  default: convertHexToRGB('#61dafb'),
+};
+
 const socialMedias = {
-  linkedin: css`
-    border-bottom: 4px solid #0077b5;
-    padding-bottom: 4px;
-
-    & + a {
-      margin-top: 44px;
-    }
-
-    svg {
-      color: #0077b5;
-    }
-  `,
+  linkedin: setSidebarCSS('0077b5'),
   github: setSidebarCSS('#f1502f'),
   gmail: setSidebarCSS('#bb001b'),
   hackerrank: setSidebarCSS('#1ba94c'),
@@ -86,9 +81,32 @@ export const StyledLink = styled.a<StyledLinkProps>`
     margin-top: 48px;
   }
 
+  &::before {
+    bottom: -4px;
+    content: '';
+    height: 4px;
+    left: 0;
+    margin-top: 10px;
+    position: absolute;
+    transition: all 0.3s ease-in-out;
+    visibility: hidden;
+    width: 0%;
+    ${props => {
+      const { r, g, b } = themeColors[props.type || 'default'];
+      return css`
+        background-color: rgb(${r}, ${g}, ${b});
+      `;
+    }}
+  }
+
   &:hover {
     transform: translateY(-10%);
     ${props => socialMedias[props.type || 'default']}
+  }
+
+  &:hover:before {
+    visibility: visible;
+    width: 100%;
   }
 
   svg {
