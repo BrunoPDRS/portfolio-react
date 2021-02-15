@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Sidebar from './components/Sidebar';
-import Home from './pages/Home';
+import Routes from './routes';
 
 import GlobalStyle from './styles/global';
 
@@ -10,7 +10,7 @@ const App: React.FC = () => {
     <div className="App">
       <Sidebar />
       <main>
-        <Home />
+        <Routes />
       </main>
       <GlobalStyle />
     </div>

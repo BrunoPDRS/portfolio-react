@@ -1,19 +1,15 @@
+import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
+
+import convertHexToRGB from '../../utils/convertHexToRGB';
 
 interface StyledLinkProps {
   type?: 'linkedin' | 'github' | 'gmail' | 'hackerrank' | 'instagram';
 }
 
-const convertHexToRGB = (hex: string) => {
-  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-
-  if (!result) return { r: 0, g: 0, b: 0 };
-  return {
-    r: parseInt(result[1], 16),
-    g: parseInt(result[2], 16),
-    b: parseInt(result[3], 16),
-  };
-};
+interface StyledNavLinkProps {
+  activeroute: string;
+}
 
 const setSidebarCSS = (colorHex: string) => {
   const { r, g, b } = convertHexToRGB(colorHex);
@@ -30,7 +26,7 @@ const themeColors = {
   gmail: convertHexToRGB('#bb001b'),
   hackerrank: convertHexToRGB('#1ba94c'),
   instagram: convertHexToRGB('#cc2366'),
-  default: convertHexToRGB('#61dafb'),
+  default: convertHexToRGB('#e83f5b'),
 };
 
 const socialMedias = {
@@ -39,7 +35,7 @@ const socialMedias = {
   gmail: setSidebarCSS('#bb001b'),
   hackerrank: setSidebarCSS('#1ba94c'),
   instagram: setSidebarCSS('#cc2366'),
-  default: setSidebarCSS('#61dafb'),
+  default: setSidebarCSS('#e83f5b'),
 };
 
 export const Container = styled.aside`
@@ -48,10 +44,11 @@ export const Container = styled.aside`
   display: flex;
   flex-direction: column;
   height: 100vh;
-  justify-content: center;
+  justify-content: space-between;
   left: 0;
   margin-right: 16px;
   overflow-x: hidden;
+  padding: 16px 0;
   position: fixed;
   top: 0;
   transition: ease-in-out 0.5s;
@@ -60,6 +57,65 @@ export const Container = styled.aside`
 
   &:hover {
     width: 250px;
+  }
+`;
+
+export const StyledNavLink = styled(Link)<StyledNavLinkProps>`
+  align-items: center;
+  color: white;
+  display: flex;
+  flex-basis: content;
+  font-size: 32px;
+  font-weight: 600;
+  padding: 4px 10px;
+  position: relative;
+  text-decoration: none;
+  transition: transform ease 0.4s;
+  width: 250px;
+  white-space: nowrap;
+
+  & + a {
+    margin-top: 48px;
+  }
+
+  &::before {
+    bottom: -4px;
+    content: '';
+    height: 4px;
+    left: 0;
+    margin-top: 10px;
+    position: absolute;
+    transition: all 0.3s ease-in-out;
+    visibility: hidden;
+    width: 0%;
+    ${() => {
+      const { r, g, b } = themeColors.default;
+      return css`
+        background-color: rgb(${r}, ${g}, ${b});
+      `;
+    }}
+  }
+
+  &:hover {
+    transform: translateY(-10%);
+    ${() => socialMedias.default}
+  }
+
+  &:hover:before {
+    visibility: visible;
+    width: 100%;
+  }
+
+  svg {
+    ${props =>
+      props.activeroute === 'true' &&
+      css`
+        color: #e83f5b;
+      `}
+    display: inline;
+    font-size: 60px;
+    margin-right: 16px;
+    transition: color ease-in 0.2s;
   }
 `;
 

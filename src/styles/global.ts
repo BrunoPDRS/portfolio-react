@@ -29,6 +29,8 @@ export default createGlobalStyle`
   }
 
   main {
-    margin-left: 100px;
+    height: 100vh;
+    margin-left: 80px;
+    width: calc(100vw - 80px);
   }
 `;
